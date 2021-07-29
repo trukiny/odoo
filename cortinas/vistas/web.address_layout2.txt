@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<t t-name="web.address_layout2">
+        <t t-set="colclass" t-value="('col mt128 float-right')"/>
+        <t t-if="address">
+            <!--
+            <div class="address row">
+                <t t-if="information_block">
+                    <t t-set="colclass" t-value="'col-5'"/>
+                    <div name="information_block" class="col-6">
+                        <t t-raw="information_block"/>
+                    </div>
+                </t>
+            -->    
+                <div name="address" t-att-class="colclass">
+                    <t t-raw="address"/>
+                </div>
+            <!--</div>-->
+        </t>
+    </t>
