@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<tree string="Textos">
+                <field name="name"/>
+                <field name="cm_pos" optional="show"/>
+                <field name="blanket_id" optional="show"/>
+                <field name="order_id" optional="show"/>
+                <field name="cm_class" optional="show"/>
+                <field name="cm_partner_id" optional="show"/>
+                <field name="cm_product_id" optional="show"/>
+                <field name="cm_partner_sap_code" optional="show"/>
+                <field name="cm_prod_type2_id" optional="show"/>
+                <field name="cm_prod_variety2_id" optional="show"/>
+                <field name="cm_prod_mark2_id" optional="show"/>
+                <field name="cm_prod_env_type2_id" optional="show"/>
+                <field name="cm_real_categ_id" optional="show"/>
+                <field name="cm_label_categ_id" optional="show"/>
+                <field name="cm_calibre_from_id" optional="show"/>
+                <field name="cm_calibre_to_id" optional="show"/>
+            </tree>

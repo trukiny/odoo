@@ -1,0 +1,363 @@
+<?xml version="1.0"?>
+<form string="Sales Order" class="o_sale_order">
+                <header>
+                    <field name="invoice_status" invisible="1"/>
+                    <field name="authorized_transaction_ids" invisible="1"/>
+                    <button name="payment_action_capture" type="object" string="Capture Transaction" class="oe_highlight" attrs="{'invisible': [('authorized_transaction_ids', '=', [])]}"/>
+                    <button name="payment_action_void" type="object" string="Void Transaction" confirm="Are you sure you want to void the authorized transaction? This action can't be undone." attrs="{'invisible': [('authorized_transaction_ids', '=', [])]}"/>
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="draft" class="btn-primary"/>
+                    <button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice" groups="sale.group_proforma_sales" class="btn-primary" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('invoice_count','&gt;=',1)]}" context="{'proforma': True}"/>
+                    <button name="action_confirm" id="action_confirm" string="Confirm" class="btn-primary" type="object" attrs="{'invisible': [('state', 'not in', ['sent'])]}"/>
+                    <button name="action_confirm" string="Confirm" type="object" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                    <button name="action_quotation_send" type="object" string="Send PRO-FORMA Invoice" groups="sale.group_proforma_sales" attrs="{'invisible': ['|', ('state', '=', 'draft'), ('invoice_count','&gt;=',1)]}" context="{'proforma': True}"/>
+                    <button name="action_quotation_send" string="Send by Email" type="object" states="sent,sale"/>
+                    <button name="action_cancel_ld" states="draft,sent,sale" type="object" string="Cancel"/>
+                    <button name="action_draft" states="cancel" type="object" string="Volver a Presupuesto"/><!--string="Set to Quotation"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,sale,sent_failed,sent_to_sap,canceled"/>
+                    <button string="Send To SAP" name="send_to_sap" type="object" class="btn-primary" attrs="{'invisible': [('state', 'not in', ('sale','sent_failed'))]}" context="{'from_button':True}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="preview_sale_order" type="object" class="oe_stat_button" icon="fa-globe icon">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Customer</span>
+                                <span class="o_stat_text">Preview</span>
+                            </div>
+                        </button>
+                        <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                            <field name="invoice_count" widget="statinfo" string="Invoices"/>
+                        </button>
+                        <field name="picking_ids" invisible="1"/>
+                        <button type="object" name="action_view_delivery" class="oe_stat_button" icon="fa-truck" attrs="{'invisible': [('delivery_count', '=', 0)]}" groups="base.group_user">
+                            <field name="delivery_count" widget="statinfo" string="Delivery"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                            <field name="company_id" invisible="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="inv_partner_id" string="Cliente" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="partner_id" string="Cliente de Facturacion" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}" options="{&quot;always_reload&quot;: True}" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="cm_code_id" invisible="1"/>
+                            <field name="date_order" groups="base.group_no_one" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])],'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="contract_type" required="1" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="purchase_order" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="representative_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="ld_payment_term_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="payment_cond_id" required="1" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <!--field name="sale_cond_id"/-->
+                            <field name="currency_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="cur_inv" invisible="1" options="{&quot;always_reload&quot;: True}"/>
+                            <field name="currency_rate" attrs="{'invisible': [('cur_inv', '=', True)],'readonly':[('sap_code', '!=', False)]}" options="{&quot;always_reload&quot;: True}"/>
+                            <field name="pallets_qty" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="blanket_order_id" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+                            <field name="sap_code" attrs="{'readonly':True}"/>
+                        </group>
+                        <group>
+                            <field name="VBAK_ZZREG_ADU" attrs="{'required': True,'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="dispatcher_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_ZZLUG_CONS" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="country_id" invisible="1"/>
+                            <field name="VBAK_ZZLUGAR_EMB" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_ZZLUG_DEST" required="1" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_ZZID_PAIS" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="shipping_company_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_ZZTRASP" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_FORMA_EMB" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="date_etd" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_ZZFEC_ETA" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="amount_price_ship" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="line_ship_price_id" invisible="1"/>
+                            <field name="payment_cond_let" invisible="1"/>
+                            <field name="unified_ship_cost" attrs="{'invisible': [('cur_inv', '=', True)],'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="supplier_dest_id" attrs="{'invisible': [('payment_cond_let', '!=', 'D')],'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="expenses_destination" attrs="{'invisible': [('payment_cond_let', '!=', 'D')],'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="VBAK_ZZBANCO_INT" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="close_contract_date" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Order Lines" name="order_lines">
+                            <field name="order_line" widget="section_and_note_one2many" mode="tree,kanban" attrs="{'readonly': ['|',('state', 'in', ('done','cancel')),('sap_code', '!=', False)]}">
+                                <form>
+                                    <group>
+                                        <field name="display_type" invisible="1"/>
+                                        <!--
+                                            We need the sequence field to be here for new lines to be added at the correct position.
+                                            TODO: at some point we want to fix this in the framework so that an invisible field is not required.
+                                        -->
+                                        <field name="sequence" invisible="1"/>
+                                        <field name="product_uom_category_id" invisible="1"/>
+
+                                        <field name="product_id" domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}" attrs="{                                             'readonly': [('product_updatable', '=', False)],                                             'required': [('display_type', '=', False)],                                         }" force_save="1" widget="many2one_barcode"/>
+
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="prod_type_id"/>
+                                            <field name="prod_variety_id"/>
+                                            <field name="prod_mark_id"/>
+                                            <field name="prod_env_type2_id"/>
+                                            <field name="prod_origin_id" required="1"/>
+                                            <!--label for="product_uom_qty"/-->
+                                            <field context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'uom_qty_change':True, 'company_id': parent.company_id}" name="product_uom_qty" invisible="1"/>
+                                        </group>
+                                        <group>
+                                            <group>
+                                                <field name="arancel_pos_id"/>                                                                                      
+                                                <field name="refund"/>
+                                                <field name="retention"/>
+                                                <field name="fruit_type"/>
+                                            </group>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="real_categ_id"/>
+                                            <field name="calibre_from"/>
+                                        </group>
+                                        <group>
+                                            <field name="label_categ_id"/>
+                                            <field name="calibre_to"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="countermark_id" attrs="{'readonly':True}"/>
+                                        </group>
+                                        <group>
+                                            <field name="purchase_order"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="pallet_qty"/>
+                                            <field name="pallet_type" required="True"/>
+                                            <field name="pallet_cap"/>
+                                        </group>
+                                        <group>
+                                            <field name="product_uom_qty2"/>
+                                            <field name="product_uom" invisible="1"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="price_unit"/>
+                                            <field name="freight"/>
+                                            <field name="assurance_id"/> <!-- attrs="{'readonly':True, 'invisible':[('assurance_id','not in','$')]}"/> -->
+                                            <field name="assurance_per_box"/>
+                                            <field name="expenses_destination_line"/>
+                                            <field name="fob_unit"/>
+                                        </group>
+                                        <group>
+                                            <field name="to_invoice_amount"/>
+                                            <field name="total_freight"/>
+                                            <field name="assurance_perc"/> <!-- attrs="{'readonly':True, 'invisible':[('assurance_perc','not in','$')]}"/> -->
+                                            <field name="assurance"/>
+                                            <field name="total_expenses_destination"/>
+                                            <field name="fob_price"/>
+                                        </group>
+                                    </group>
+                                    <group invisible="1">
+                                        <group attrs="{'invisible': [('display_type', '!=', False)]}">
+                                            <field name="product_updatable" invisible="1"/>
+                                            <field name="invoice_status" invisible="1"/>
+                                            <field name="qty_to_invoice" invisible="1"/>
+                                            <field name="qty_delivered_manual" invisible="1"/>
+                                            <field name="qty_delivered_method" invisible="1"/>
+                                            <field name="price_total" invisible="1"/>
+                                            <field name="price_tax" invisible="1"/>
+                                            <field name="price_subtotal" invisible="1"/>
+
+                                            <label for="qty_delivered" string="Delivered" invisible="1"/>
+                                            <div name="delivered_qty" invisible="1">
+                                                <field name="qty_delivered" invisible="1"/>
+                                            </div>
+                                            <label for="qty_invoiced" string="Invoiced" invisible="1"/>
+                                            <div name="invoiced_qty" invisible="1">
+                                                <field name="qty_invoiced" invisible="1"/>
+                                            </div>
+                                            <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" context="{'search_view_ref': 'account.account_tax_view_search'}" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                                            <label for="discount" groups="product.group_discount_per_so_line"/>
+                                            <div name="discount" groups="product.group_discount_per_so_line">
+                                                <field name="discount" class="oe_inline"/> %
+                                            </div>
+                                            <!--
+                                                We need the sequence field to be here
+                                                because we want to be able to overwrite the default sequence value in the JS
+                                                in order for new lines to be added at the correct position.
+                                                NOTE: at some point we want to fix this in the framework so that an invisible field is not required.
+                                            -->
+                                            <field name="sequence" invisible="1"/>
+                                        </group>
+                                        <group invisible="1">
+                                            <label for="customer_lead"/>
+                                            <div name="lead">
+                                                <field name="customer_lead" class="oe_inline"/> days
+                                            </div>
+                                            <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags" options="{'color_field': 'color'}" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/>
+                                        </group>
+                                    </group>
+                                    <!--<label for="name" string="Description" attrs="{'invisible': [('display_type', '!=', False)]}"/>-->
+                                    <label for="name" string="Section Name (eg. Products, Services)" attrs="{'invisible': [('display_type', '!=', 'line_section')]}"/>
+                                    <label for="name" string="Note" attrs="{'invisible': [('display_type', '!=', 'line_note')]}"/>
+                                    <!--<field name="name"/>-->
+                                    <field name="state" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                </form>
+                                <tree string="Sales Order Lines" decoration-info="(not display_type and invoice_status == 'to invoice')">
+                                    <!--control>
+                                        <create name="add_product_control" string="Add a product"/>
+                                        <create name="add_section_control" string="Add a section" context="{'default_display_type': 'line_section'}"/>
+                                        <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                    </control-->
+                                    <field name="invoice_status" invisible="1"/>
+                                    <field name="sequence" widget="handle" invisible="1"/>
+                                    <!-- We do not display the type because we don't want the user to be bothered with that information if he has no section or note. -->
+                                    <field name="display_type" invisible="1"/>
+                                    <field name="product_uom_category_id" invisible="1"/>
+
+                                    <field name="product_updatable" invisible="1"/>
+                                    <field name="product_id" attrs="{                                         'readonly': [('product_updatable', '=', False)],                                         'required': [('display_type', '=', False)],                                     }" options="{'no_open': True}" force_save="1" context="{                                         'partner_id': parent.partner_id,                                         'quantity': product_uom_qty,                                         'pricelist': parent.pricelist_id,                                         'uom':product_uom,                                         'company_id': parent.company_id,                                         'default_lst_price': price_unit,                                         'default_description_sale': name                                     }" domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" widget="product_configurator"/>
+                                    <field name="product_template_id" string="Product" invisible="1" attrs="{                                       'readonly': [('product_updatable', '=', False)],                                       'required': [('display_type', '=', False)],                                   }" options="{'no_open': True}" context="{                                       'partner_id': parent.partner_id,                                       'quantity': product_uom_qty,                                       'pricelist': parent.pricelist_id,                                       'uom':product_uom,                                       'company_id': parent.company_id,                                       'default_list_price': price_unit,                                       'default_description_sale': name                                   }" domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" widget="product_configurator"/>
+                                    <field name="name" widget="section_and_note_text" optional="show" invisible="1"/>
+                                    <field name="price_unit" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}"/>
+                                    <field name="analytic_tag_ids" optional="hide" groups="analytic.group_analytic_tags" widget="many2many_tags" options="{'color_field': 'color'}" domain="['|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" invisible="1"/>
+                                    <field name="product_uom_qty2"/>
+                                    <field name="product_uom_qty" context="{                                         'partner_id': parent.partner_id,                                         'quantity': product_uom_qty,                                         'pricelist': parent.pricelist_id,                                         'uom': product_uom,                                         'company_id': parent.company_id                                     }" invisible="1"/>
+                                    <field name="qty_delivered" string="Delivered" attrs="{                                         'column_invisible': [('parent.state', 'not in', ['sale', 'done'])],                                         'readonly': [('qty_delivered_method', '!=', 'manual')]                                     }" optional="show" invisible="1"/>
+                                    <field name="qty_delivered_manual" invisible="1"/>
+                                    <field name="qty_delivered_method" invisible="1"/>
+                                    <field name="qty_invoiced" string="Invoiced" attrs="{'column_invisible': [('parent.state', 'not in', ['sale', 'done'])]}" optional="show" invisible="1"/>
+                                    <field name="qty_to_invoice" invisible="1"/>
+                                    <field name="product_uom" force_save="1" string="UoM" attrs="{                                         'readonly': [('state', 'in', ('sale','done', 'cancel'))],                                         'required': [('display_type', '=', False)],                                     }" context="{'company_id': parent.company_id}" groups="uom.group_uom" options="{&quot;no_open&quot;: True}" optional="show" invisible="1"/>
+                                    <field name="customer_lead" optional="hide" attrs="{'readonly': [('parent.state', 'not in', ['draft', 'sent'])]}" invisible="1"/>
+                                    <field name="total_freight"/>
+                                    <field name="assurance"/>
+                                    <field name="to_invoice_amount"/>
+                                    <field name="fob_price"/>
+                                    <field name="real_categ_id" invisible="1"/>
+                                    <field name="label_categ_id" invisible="1"/>
+                                    <field name="calibre_from" invisible="1"/>
+                                    <field name="calibre_to" invisible="1"/>
+                                    <field name="countermark_id" attrs="{'readonly':True}"/>
+                                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" attrs="{'readonly': [('qty_invoiced', '&gt;', 0)]}" optional="show" invisible="1"/>
+                                    <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line" optional="show" invisible="1"/>
+                                    <field name="price_subtotal" widget="monetary" groups="account.group_show_line_subtotals_tax_excluded" invisible="1"/>
+                                    <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included" invisible="1"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="invoice_status" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="price_tax" invisible="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <button name="return_copy" string="register" type="object" icon="fa-copy"/>
+                                </tree>
+                            </field>
+                            <group name="note_group" col="6">
+                                <group colspan="4">
+                                    <field name="note" nolabel="1" placeholder="Terms and conditions..."/>
+                                </group>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="to_invoice_amount"/>
+                                    </div>
+                                    <field name="to_invoice_amount" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="total_freight"/>
+                                    </div>
+                                    <field name="total_freight" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="total_assurance"/>
+                                    </div>
+                                    <field name="total_assurance" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="tot_expenses_destination"/>
+                                    </div>
+                                    <field name="tot_expenses_destination" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="fob_price"/>
+                                    </div>
+                                    <field name="fob_price" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>
+                        </page>
+                        <page string="Instrucciones Documentales">
+                            <group>
+                                <field name="doc_inst_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                <field name="doc_inst_txt" widget="html" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            </group>
+                        </page>
+                        <page name="otros" string="Otros">
+                            <group>
+                                <group>
+                                    <field name="partner_invoice_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}" options="{&quot;always_reload&quot;: True}" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}" options="{&quot;always_reload&quot;: True}" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="price_ship_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                </group>
+                                <group>
+                                    <field name="validity_date" attrs="{'invisible': [('state', 'in', ['sale', 'done'])],'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="pricelist_id" groups="product.group_product_pricelist" options="{'no_open':True,'no_create': True}" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="payment_term_id" options="{'no_open':True,'no_create': True}" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Aduana" name="aduana">
+                            <group>
+                                <group>
+                                    <field name="VBAK_ZZFEC_ENVDOC" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="VBAK_ZZNRO_GUIA" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="VBAK_ZZATA" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                </group>
+                                <group>
+                                    <field name="VBAK_ZZID_ADUANA_SAL" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="VBAK_ZZID_ADUANA_INT" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="VBAK_ZZPEM_PROV" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Nros Aduana" name="customs_nrs">
+                            <field name="customs_ids" attrs="{'readonly':[('sap_code', '!=', False)]}">
+                                <tree>
+                                    <field name="NUM_PERM" width="150px"/>
+                                    <field name="FECHA_OFI"/>
+                                    <field name="FECHA_PREC"/>
+                                    <field name="FECHA_CUMP"/>
+                                    <field name="FECHA_REI"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="sap_messages" string="SAP Response">
+                            <group>
+                                <group>
+                                    <field name="sap_result" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="sap_message_recieved" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                    <field name="sap_message_sent" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="obs_messages" string="Observacion">
+                            <group>
+                                <group>
+                                    <field name="note_inv" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        

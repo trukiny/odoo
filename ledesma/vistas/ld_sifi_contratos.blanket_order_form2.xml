@@ -1,0 +1,233 @@
+<?xml version="1.0"?>
+<form>
+                <header>
+                    <!--sales_blanket_order-->
+                    <button name="action_contract_send" string="Send by Email" type="object" states="open" class="btn-primary"/>
+                    <button name="831" string="Create Sale Order" type="action" class="btn-primary" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <button name="set_to_draft" states="expired" string="Set To Draft" class="btn-secondary" type="object"/>
+                    <button name="action_cancel" states="open" string="Cancel" class="btn-secondary" type="object"/>
+                    <button name="action_confirm" states="draft" string="Confirm" class="btn-primary o_sale_confirm" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,expired" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="view_sale_orders" type="object" class="oe_stat_button" icon="fa-list-alt">
+                            <field name="sale_order_count" widget="statinfo" string="Sale Orders"/>
+                        </button>
+                        <button type="object" name="view_sale_blanket_order_lines" class="oe_stat_button" attrs="{'invisible':[('order_line_count', '=', 0)]}" icon="fa-list">
+                            <field name="order_line_count" widget="statinfo" string="Lines"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}" options="{&quot;always_reload&quot;: True}"/>
+                            <field name="partner_invoice_id" string="Cliente de Facturacion" groups="sale.group_delivery_invoice_address" context="{'default_type':'invoice'}" options="{&quot;always_reload&quot;: True}"/>
+                            <field name="cm_code_id"/>
+                            <field name="currency2_id" attrs="{'required':True}"/>
+                            <field name="user_id" invisible="1"/>
+
+
+
+                            <field name="year_only"/>
+                            <!--field name="inv_partner_id"/-->
+                            <field name="purchase_order"/>
+                            <field name="representative_id"/>
+                            <field name="bonus" attrs="{'invisible': [('representative_id', '=', False)]}"/>
+                            <field name="sale_bonus_cond_id" attrs="{'invisible': [('representative_id', '=', False)]}"/>
+
+
+
+                        </group>
+                        <group>
+                            <field name="date_order"/>
+                            <field name="payment_term_id" options="{'no_open':False,'no_create': True}"/>
+                            <field name="ld_payment_term_id"/>
+                            <field name="contract_type" required='1'/>
+                            <field name="payment_cond_id" required='1'/>
+                            <!--field name="sale_cond_id"/-->
+                            <field name="VBAK_ZZID_ADUANA_SAL" invisible="1"/>
+                            <field name="VBAK_ZZLUG_DEST"/>
+                            <field name="country_id"/>
+                            <field name="etd"/>
+                            <field name="pallets_qty"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Order Lines" name="order_lines">
+                            <field name="order_line" attrs="{'readonly': [('state', 'in', ('done','open'))]}">
+                                <tree>
+                                    <field name="product_id" options="{'no_open': True}" force_save="1" required="1" domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" widget="product_configurator"/>
+                                    <field name="name" invisible="1"/>
+                                    <field name="purchase_order"/>
+                                    <field name="week_from_ro"/>
+                                    <field name="product_uom_qty" context="{                                         'partner_id': parent.partner_id,                                         'quantity': product_uom_qty,                                         'pricelist': parent.pricelist_id,                                         'uom': product_uom,                                         'company_id': parent.company_id                                     }"/>
+                                    <field name="price_unit"/>
+                                    <field name="price_total" widget="monetary" groups="account.group_show_line_subtotals_tax_included"/>
+                                    <field name="countermark_id" invisible="1"/>
+                                    <field name="countermark2_id"/>
+
+                                    <field name="product_uom_category_id" invisible="1"/>
+                                    <field name="product_uom" force_save="1" string="UoM" context="{'company_id': parent.company_id}" groups="uom.group_uom" options="{&quot;no_open&quot;: True}" optional="show" invisible="1"/>
+                                    <field name="ordered_uom_qty" invisible="1"/>
+                                    <field name="invoiced_uom_qty" invisible="1"/>
+                                    <field name="delivered_uom_qty" invisible="1"/>
+                                    <field name="remaining_uom_qty" invisible="1"/>
+                                    <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" domain="[('type_tax_use','=','sale'),('company_id','=',parent.company_id)]" optional="show" invisible="1"/>
+                                    <field name="discount" string="Disc.%" groups="product.group_discount_per_so_line" optional="show" invisible="1"/>
+                                    <field name="price_subtotal" widget="monetary" groups="account.group_show_line_subtotals_tax_excluded" invisible="1"/>
+                                    <field name="price_tax" invisible="1"/>
+                                    <field name="order_id" invisible="1"/>
+                                    <field name="salesman_id" invisible="1"/>
+                                    <button name="return_copy" string="Copy" type="object" icon="fa-copy"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="product_uom_category_id" invisible="1"/>
+                                            <field name="company_id" invisible="1"/>
+                                            <field name="prod_type_id"/>
+                                            <field name="prod_mark_id"/>
+                                            <field name="prod_origin_id" invisible="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="prod_variety_id"/>
+                                            <field name="prod_env_type2_id"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="product2_id"/>
+                                            <field name="product_uom" invisible="1"/>
+                                            <field name="product_id" invisible="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="purchase_order"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="fruit_type"/>
+                                            <field name="pallet_qty"/>
+                                        </group>
+                                        <group>
+                                            <field name="product_uom_qty"/>
+                                            <field name="price_unit"/>
+                                            <field name="box_price" invisible="1"/>
+                                            <field name="ton_price" invisible="1"/>
+                                            <field name="ton_price2"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="week_from" invisible="1"/>
+                                            <field name="week_from_ro"/>
+                                            <field name="date_from"/>
+                                        </group>
+                                        <group>
+                                            <field name="week_to" invisible="1"/>
+                                            <field name="week_to_ro"/>
+                                            <field name="date_to"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="real_categ_id"/>
+                                            <field name="quality"/>
+                                        </group>
+                                        <group>
+                                            <field name="label_categ_id"/>
+                                            <field name="quality_perc"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="calibre_from"/>
+                                        </group>
+                                        <group>
+                                            <field name="calibre_to"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <group>
+                                            <field name="stickers"/>
+                                            <field name="wrap_paper"/>
+                                        </group>
+                                        <group>
+                                            <field name="stickers_obs"/>
+                                            <field name="sulf_obs"/>
+                                        </group>
+                                    </group>
+                                    <group>
+                                        <field name="countermark2_id"/>
+                                        <field name="countermark_id" invisible="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                            <group name="note_group" col="6">
+                                <group colspan="4">
+                                    <!--field name="note" nolabel="1" placeholder="Terms and conditions..."/-->
+                                </group>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <!--field name="amount_untaxed" widget='monetary'
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="amount_tax" widget='monetary'
+                                           options="{'currency_field': 'currency_id'}"/-->
+                                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                        <label for="amount_total"/>
+                                    </div>
+                                    <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>
+                        </page>
+                        <page string="Other Information">
+                            <group>
+                                <group>
+                                    <field name="user_id"/>
+                                    <field name="team_id"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="fiscal_position_id" options="{'no_create': True}"/>
+                                    <field name="pricelist_id"/>
+                                    <field name="partner_shipping_id" groups="sale.group_delivery_invoice_address" context="{'default_type':'delivery'}" options="{&quot;always_reload&quot;: True}"/>
+                                    <field name="validity_date"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="terms" string="Terminos &amp; Cond">
+                            <group>
+                                <field name="terms_conds_id"/>
+                                <field name="terms_conds_text" widget="html"/>
+                            </group>
+                        </page>
+                        <page name="important" string="Immportant">
+                            <group>
+                                <field name="important_id"/>
+                                <field name="important_text" widget="html"/>
+                            </group>
+                        </page>
+                        <page name="obs" string="Observaciones">
+                            <group>
+                                <field name="note"/>
+                            </group>
+                        </page>
+                        <page name="doc_inst" string="Instrucciones Documentales">
+                            <group>
+                                <field name="ints_docs_id"/>
+                                <field name="ints_docs_text" widget="html"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+
+            </form>
+        

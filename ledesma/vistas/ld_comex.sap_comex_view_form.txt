@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_embark" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('embark_count', '=', 0)]}">
+                            <field name="embark_count" widget="statinfo" string="Instrucciones"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                      <h1>
+                          <field name="order_nr" readonly="1"/>
+                      </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="create_date" attrs="{'readonly':True}"/>
+                            <!--<field name="order_nr"/>-->
+                            <!--field name="name"/-->
+                            <field name="partner_id" attrs="{'readonly':True}"/>
+                            <field name="purchase_order" attrs="{'readonly':True}"/>
+                            <field name="dispatch_company_id" attrs="{'readonly':True}"/>
+                            <field name="ship_company_id" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZTRASP" attrs="{'readonly':True}"/>
+                            <field name="container" attrs="{'readonly':True}"/>
+                            <field name="VBAK_FORMA_EMB" attrs="{'readonly':True}"/>
+                        </group>
+                        <group>
+                            <field name="write_date" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZREG_ADU" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZNRO_GUIA" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZFEC_ENVDOC" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZID_ADUANA_SAL" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZLUGAR_EMB" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZLUG_DEST" attrs="{'readonly':True}"/>
+                            <field name="etd_date" attrs="{'readonly':True}"/>
+                            <field name="VBAK_ZZFEC_ETA" attrs="{'readonly':True}"/>
+                            <field name="prod_type_id" attrs="{'readonly':True}"/>
+                            <field name="prod_variety_id" attrs="{'readonly':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="line_ids">
+                                <tree string="Lines">
+                                    <field name="VBAK_ZZPEM_PROV"/>
+                                    <field name="official_date"/>
+                                    <field name="due_date"/>
+                                    <field name="NUM_PERM"/>
+                                    <field name="amount_total"/>
+                                    <field name="off_date"/>
+                                    <field name="close_pe_fc"/>
+                                    <field name="suse_bc1"/>
+                                    <field name="gaex_bc2"/>
+                                    <field name="tasu_bc1"/>
+                                    <field name="tasu_date"/>
+                                    <field name="rights_bc1"/>
+                                    <field name="rights_date"/>
+                                    <field name="refund_x"/>
+                                    <field name="blocked"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Products 2">
+                            <field name="line2_ids">
+                                <tree string="Lines">
+                                    <field name="sap_code"/>
+                                    <field name="invoice_nr"/>
+                                    <field name="amount"/>
+                                    <field name="sap_nc_nd"/>
+                                    <field name="nr_nc_nc"/>
+                                    <field name="amount_nc_nd"/>
+                                    <field name="cancel_sap"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Products 3">
+                            <field name="line3_ids">
+                                <tree string="Lines">
+                                    <field name="product_id"/>
+                                    <field name="pallet_qty"/>
+                                    <field name="product_uom_qty2"/>
+                                    <field name="comments"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        
