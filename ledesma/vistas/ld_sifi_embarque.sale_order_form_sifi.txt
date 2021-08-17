@@ -40,10 +40,11 @@
                     </div>
                     <group>
                         <group>
-                            <field name="inv_partner_id" string="Cliente" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="partner_id" string="Cliente de Facturacion" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer'}" options="{&quot;always_reload&quot;: True}" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="inv_partner_id" string="Cliente" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="cm_code_id" invisible="1"/>
                             <field name="date_order" groups="base.group_no_one" attrs="{'invisible': [('state', 'in', ['sale', 'done', 'cancel'])],'readonly':[('sap_code', '!=', False)]}"/>
+                            <field name="close_contract_date" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="contract_type" required="1" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="purchase_order" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="representative_id" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
@@ -77,7 +78,6 @@
                             <field name="supplier_dest_id" attrs="{'invisible': [('payment_cond_let', '!=', 'D')],'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="expenses_destination" attrs="{'invisible': [('payment_cond_let', '!=', 'D')],'readonly':[('sap_code', '!=', False)]}"/>
                             <field name="VBAK_ZZBANCO_INT" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
-                            <field name="close_contract_date" attrs="{'readonly':[('sap_code', '!=', False)]}"/>
                         </group>
                     </group>
                     <notebook>
@@ -108,7 +108,7 @@
                                         </group>
                                         <group>
                                             <group>
-                                                <field name="arancel_pos_id"/>                                                                                      
+                                                <field name="arancel_pos_id"/>
                                                 <field name="refund"/>
                                                 <field name="retention"/>
                                                 <field name="fruit_type"/>
@@ -333,6 +333,7 @@
                                     <field name="FECHA_PREC"/>
                                     <field name="FECHA_CUMP"/>
                                     <field name="FECHA_REI"/>
+                                    <field name="MONTO_REI"/>
                                 </tree>
                             </field>
                         </page>
