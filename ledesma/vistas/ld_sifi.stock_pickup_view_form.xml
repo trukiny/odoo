@@ -25,10 +25,8 @@
                             <field name="VBAK_ZZID_ADUANA_SAL"/>
                             <field name="payment_cond_id"/>
                             <field name="travel_nr"/>
-                        <group>   
                             <field name="instruction_id"/>
                             <field name="sap_code"/>
-                        </group>     
                         </group>
                         <group>
                             <field name="LIKP_WADAT_IST"/>
