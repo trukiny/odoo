@@ -16,38 +16,41 @@
                             <field name="partner_id"/>
                             <field name="ld_prod_type_id"/>
                             <field name="ld_prod_var_com_id"/>
-                            <field name="LIKP_TRATY"/>
-                            <field name="booking"/>
-                            <field name="shipping_company_id"/>
-                            <field name="VBAK_ZZTRASP"/>
-                            <field name="travel_nr"/>
-                            <field name="container"/>
-                            <field name="instruction_id"/>
+                            <field name="ld_state_id"/>
                             <field name="VBAK_ZZLUG_CONS"/>
                             <field name="VBAK_ZZLUG_EMB"/>
                             <field name="VBAK_ZZLUG_DEST"/>
                             <field name="VBAK_ZZID_PAIS"/>
-                            <field name="LIKP_VBELN_2"/>
+                            <field name="VBAK_ZZID_ADUANA_INT"/>
+                            <field name="VBAK_ZZID_ADUANA_SAL"/>
+                            <field name="payment_cond_id"/>
+                            <field name="travel_nr"/>
+                        <group>   
+                            <field name="instruction_id"/>
+                            <field name="sap_code"/>
+                        </group>     
                         </group>
                         <group>
                             <field name="LIKP_WADAT_IST"/>
+                            <field name="LIKP_XBLNR_2"/>
+                            <field name="LIKP_VBELN_2"/>
+                            <!--<field name="VBAK_ZZATA"/>-->
+                            <field name="booking"/>
+                            <field name="shipping_company_id"/>
                             <field name="consolidation_date"/>
-                            <field name="RETURN"/>
+                            <!--<field name="RETURN"/>
                             <field name="DELIVERY"/>
                             <field name="LIKP_LFART"/>
                             <field name="LIKP_UPDKZ"/>
                             <field name="LIKP_VSBED"/>
                             <field name="LIKP_VSTEL"/>
-                            <field name="LIKP_VKORG"/>
+                            <field name="LIKP_VKORG"/>-->
+                            <field name="VBAK_ZZTRASP"/>
+                            <field name="LIKP_TRATY"/>
+                            <field name="container"/>
                             <field name="LIKP_BTGEW"/>
                             <field name="LIKP_NTGEW"/>
-                            <field name="sap_code"/>
-                            <field name="VBAK_ZZID_ADUANA_INT"/>
-                            <field name="VBAK_ZZID_ADUANA_SAL"/>
                             <field name="VBAK_ZZPEM_PROV"/>
-                            <field name="payment_cond_id"/>
-                            <field name="LIKP_XBLNR_2"/>
-                            <!--field name="VBAK_ZZATA"/-->
                         </group>
                     </group>
                     <notebook>
@@ -126,6 +129,19 @@
                                     <field name="LIKP_ZZTARIFA"/>
                                     <field name="LIKP_ZZTARA"/>
                                     <field name="LIKP_ZZTARIFA_REF"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="five" string="Page 5">
+                            <group>
+                                <group>
+                                    <field name="RETURN"/>
+                                    <field name="DELIVERY"/>
+                                    <field name="LIKP_LFART"/>
+                                    <field name="LIKP_UPDKZ"/>
+                                    <field name="LIKP_VSBED"/>
+                                    <field name="LIKP_VSTEL"/>
+                                    <field name="LIKP_VKORG"/>
                                 </group>
                             </group>
                         </page>
