@@ -1,46 +1,46 @@
 <?xml version="1.0"?>
 <form string="Textos">
-                <sheet>
                 <header>
-                    <field name="state" widget="statusbar"/>
-                    <button type="object" name="send_to_sap_countermark" string="Send To Sap"/>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                        <button type="object" name="send_to_sap_countermark" string="Send To Sap"/>
                 </header>
-				            <div class="oe_title">
-                      <h1>
-                          <field name="name" readonly="1"/>
-                      </h1>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
                     </div>
-                <group>
                     <group>
-                        <!--<field name="name"/>-->
-                        <field name="cm_class" attrs="{'readonly':True}"/>
-                        <field name="cm_pos" attrs="{'readonly':True}"/>
-                        <field name="cm_partner_id" attrs="{'readonly':True}"/>
-                        <field name="cm_product_id" attrs="{'readonly':True}"/>
-                        <field name="cm_partner_sap_code" attrs="{'readonly':True}"/>
-                        <field name="blanket_id" attrs="{'readonly':True}"/>
-                        <field name="order_id" attrs="{'readonly':True}"/>
-                    </group>
-                    <group>
-                        <field name="cm_prod_type2_id" attrs="{'readonly':True}"/>
-                        <field name="cm_prod_variety2_id" attrs="{'readonly':True}"/>
-                        <field name="cm_prod_mark2_id" attrs="{'readonly':True}"/>
-                        <field name="cm_prod_env_type2_id" attrs="{'readonly':True}"/>
-                        <field name="cm_real_categ_id" attrs="{'readonly':True}"/>
-                        <field name="cm_label_categ_id" attrs="{'readonly':True}"/>
-                        <field name="cm_calibre_from_id" attrs="{'readonly':True}"/>
-                        <field name="cm_calibre_to_id" attrs="{'readonly':True}"/>
-                    </group>
-                </group>
-                <notebook>
-                    <page name="sap" string="SAP Messages">
                         <group>
-                            <field name="sap_result" attrs="{'readonly':True}"/>
-                            <field name="sap_message_recieved" attrs="{'readonly':True}"/>
-                            <field name="sap_message_sent" attrs="{'readonly':True}"/>
+                            <!--<field name="name"/>-->
+                            <field name="cm_class" attrs="{'readonly':True}"/>
+                            <field name="cm_pos" attrs="{'readonly':True}"/>
+                            <field name="cm_partner_id" attrs="{'readonly':True}"/>
+                            <field name="cm_product_id" attrs="{'readonly':True}"/>
+                            <field name="cm_partner_sap_code" attrs="{'readonly':True}"/>
+                            <field name="blanket_id" attrs="{'readonly':True}"/>
+                            <field name="order_id" attrs="{'readonly':True}"/>
                         </group>
-                    </page>
-                </notebook>
+                        <group>
+                            <field name="cm_prod_type2_id" attrs="{'readonly':True}"/>
+                            <field name="cm_prod_variety2_id" attrs="{'readonly':True}"/>
+                            <field name="cm_prod_mark2_id" attrs="{'readonly':True}"/>
+                            <field name="cm_prod_env_type2_id" attrs="{'readonly':True}"/>
+                            <field name="cm_real_categ_id" attrs="{'readonly':True}"/>
+                            <field name="cm_label_categ_id" attrs="{'readonly':True}"/>
+                            <field name="cm_calibre_from_id" attrs="{'readonly':True}"/>
+                            <field name="cm_calibre_to_id" attrs="{'readonly':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="sap" string="SAP Messages">
+                            <group>
+                                <field name="sap_result" attrs="{'readonly':True}"/>
+                                <field name="sap_message_recieved" attrs="{'readonly':True}"/>
+                                <field name="sap_message_sent" attrs="{'readonly':True}"/>
+                            </group>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         

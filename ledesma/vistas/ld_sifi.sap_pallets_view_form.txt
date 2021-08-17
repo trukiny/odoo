@@ -7,45 +7,45 @@
                         </h1>
                     </div>
                     <group>
-                        <group>
-                            <!--<field name="name"/>-->
-                            <field name="company_id"/>
-                            <field name="ld_senasa_pallet"/>
-                            <field name="ld_center_loc_id"/>
-                            <field name="ld_warehouse_id"/>
-                            <field name="ld_partner_id"/>
-                            <field name="ld_state_id"/>
-                            <field name="VBAK_ZZLUGAR_EMB"/>
-                            <field name="ld_embark_date"/>
+                         <group>
+                            <field name="product_id"/>
+                            <field name="ld_prod_type_id"/>
+                            <field name="ld_prod_var_field_id"/>
+                            <field name="ld_prod_var_com_id"/>
+                            <field name="ld_prod_mark_id"/>
+                            <field name="ld_prod_env_type2_id"/>
                         </group>
                         <group>
                             <field name="ld_crate_date"/>
                             <field name="ld_update_date"/>
-                            <field name="ld_VBAK_FORMA_EMB"/>
-                            <field name="VEKP_EXIDV2"/>
-                            <field name="ld_VBAK_ZZTRASP"/>
-                            <field name="ld_VBAK_ZZLUG_DEST"/>
-                            <field name="ld_country_dest_id"/>
+                            <field name="ld_countermark_id"/>
+                            <field name="ld_countermark_pos_id"/>
+                            <field name="ld_calibre_ue"/>
+                            <field name="ld_calibre_qty"/>
+                            <field name="ld_calibre_from"/>
+                            <field name="ld_calibre_to"/>
                         </group>
                     </group>
                     <notebook>
                         <page name="one" string="Page 1">
                             <group>
                                 <group>
-                                    <field name="product_id"/>
-                                    <field name="ld_prod_type_id"/>
-                                    <field name="ld_prod_var_field_id"/>
-                                    <field name="ld_prod_var_com_id"/>
-                                    <field name="ld_prod_mark_id"/>
-                                    <field name="ld_prod_env_type2_id"/>
+                                    <!--<field name="name"/>-->
+                                    <field name="company_id"/>
+                                    <field name="ld_senasa_pallet"/>
+                                    <field name="ld_center_loc_id"/>
+                                    <field name="ld_warehouse_id"/>
+                                    <field name="ld_partner_id"/>
+                                    <field name="ld_state_id"/>
+                                    <field name="VBAK_ZZLUGAR_EMB"/>
+                                    <field name="ld_embark_date"/>
                                 </group>
                                 <group>
-                                    <field name="ld_countermark_id"/>
-                                    <field name="ld_countermark_pos_id"/>
-                                    <field name="ld_calibre_ue"/>
-                                    <field name="ld_calibre_qty"/>
-                                    <field name="ld_calibre_from"/>
-                                    <field name="ld_calibre_to"/>
+                                    <field name="ld_VBAK_FORMA_EMB"/>
+                                    <field name="VEKP_EXIDV2"/>
+                                    <field name="ld_VBAK_ZZTRASP"/>
+                                    <field name="ld_VBAK_ZZLUG_DEST"/>
+                                    <field name="ld_country_dest_id"/>
                                 </group>
                             </group>
                         </page>
@@ -91,7 +91,7 @@
                                     <field name="ld_special"/>
                                     <field name="ld_productor"/>
                                     <field name="ld_proc_order"/>
-                                    <!--<field name="LIKT_XABLN"/>-->
+                                    <field name="LIKT_XABLN"/>
                                 </group>
                             </group>
                         </page>
