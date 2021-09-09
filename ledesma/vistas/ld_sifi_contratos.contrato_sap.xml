@@ -4,32 +4,33 @@
             <t t-set="print_date" t-value="datetime.datetime.utcnow().strftime('%Y-%m-%d - %H:%M:%S')"/>
             <t t-foreach="docs" t-as="o">
                 <t t-call="ld_sifi_contratos.internal_layout">
-                    <div class="page">
+                    <div class="page" style="font-family:Verdana;">
                         <div class="row" style="border-style:solid; font-size:9px; border-width: 1px;">
                             <div class="col-12">
                                 <div class="row mr4 ml4">
                                     <div class="col-4 mt4">
-                                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 45px;" alt="Logo"/>
+                                        <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" style="max-height: 60px;" alt="Logo"/>
                                     </div>
                                     <div class="col-4 mt4" style="text-align:center;">
-                                        <span><b>"LEDESMA S.A.A.I."</b></span><br/>
+                                        <!--<span><b>"LEDESMA S.A.A.I."</b></span><br/>-->
                                         <span t-field="o.company_id.street"/>
                                     </div>
                                     <div class="col-4 mt4" style="text-align:center;">
-                                        <span><b>SALE AGREEMENT</b></span><br/>
+                                        <H6><span><b>SALE AGREEMENT</b></span></H6><!--<br/>-->
                                         <div class="row" style="text-align:left;">
-                                            <div class="col-6" style="background-color:#777799;border: 1px solid black;">
-                                                <span>NUMBER: </span><br/>
+                                            <!--<div class="col-6" style="background-color:#777799;border: 1px solid black;">-->
+                                              <div class="col-6" style="background-color:#2F4C92;border: 1px solid black;color:#FFFFFF;">  
+                                                <span><b>NUMBER: </b></span><br/>
                                             </div>
                                             <div class="col-6 mr4" style="border: 1px solid black;">
                                                 <span t-field="o.name"/><br/>
                                             </div>
                                         </div>
                                         <div class="row mt4" style="text-align:left;">
-                                            <div class="col-6" style="background-color:#777799;border: 1px solid black;">
-                                                <span>DATE: </span><br/>
-                                                <span>E-MAIL: </span><br/>
-                                                <span>CONTACT PHONE: </span><br/>
+                                            <div class="col-6" style="background-color:#2F4C92;border: 1px solid black;color:#FFFFFF;">
+                                                <span><b>DATE: </b></span><br/>
+                                                <span><b>E-MAIL: </b></span><br/>
+                                                <span><b>CONTACT PHONE: </b></span><br/>
                                             </div>
                                             <div class="col-6 mr4" style="border: 1px solid black;">
                                                 <span t-field="o.date_order" t-options="{&quot;format&quot;: &quot;dd/MM/yyyy&quot;}"/><br/>
@@ -39,17 +40,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mr4 ml4 mt4" style="text-align:center;font-size:9px;background-color:#777799;">
+                                <div class="row mr4 ml4 mt4" style="text-align:center;font-size:9px;background-color:#2F4C92;color:#FFFFFF;">
                                     <div class="col-6" style="border: 1px solid black;">
-                                        <span>SELLER</span>
+                                        <span><b>SELLER</b></span>
                                     </div>
                                     <div class="col-6" style="border: 1px solid black;">
-                                        <span>BUYER</span>
+                                        <span><b>BUYER</b></span>
                                     </div>
                                 </div>
                                 <div class="row ml4 mr4" style="text-align:center;font-size:9px;">
                                     <div class="col-6" style="border: 1px solid black;border-top-style: hidden;">
-                                        <span>LEDESMA S.A.A.I.</span>
+                                        <!--<span>LEDESMA S.A.A.I.</span>-->
+                                        <span>LEDESMA SOCIEDAD ANONIMA AGRICOLA INDUSTRIAL</span>
                                     </div>
                                     <div class="col-6" style="border: 1px solid black;border-top-style: hidden;">
                                         <span t-field="o.partner_id.name"/>
@@ -63,28 +65,34 @@
                                 </div>
                                 <div class="row ml4 mr4 mt8" style="text-align:left;font-size:9px;">
                                     <div class="col-3">
-                                        <span>COMMERCIAL INFORMATION:</span>
+                                        <span><b>COMMERCIAL INFORMATION:</b></span>
                                     </div>
                                     <div class="col-9">
-                                        <div class="row" style="text-align:center;font-size:9px;background-color:#777799;">
-                                            <div class="col-4" style="border: 1px solid black;">
-                                                <span>TYPE OF PRICE</span>
+                                        <div class="row" style="text-align:center;font-size:9px;background-color:#2F4C92;color:#FFFFFF;">
+                                            <div class="col-3" style="border: 1px solid black;">
+                                                <span><b>PURCHASE ORDER</b></span>
                                             </div>
-                                            <div class="col-4" style="border: 1px solid black;">
-                                                <span>INCOTERM</span>
+                                            <div class="col-3" style="border: 1px solid black;">
+                                                <span><b>TYPE OF PRICE</b></span>
                                             </div>
-                                            <div class="col-4" style="border: 1px solid black;">
-                                                <span>TERMS OF PAYMENT</span>
+                                            <div class="col-3" style="border: 1px solid black;">
+                                                <span><b>INCOTERM</b></span>
+                                            </div>
+                                            <div class="col-3" style="border: 1px solid black;">
+                                                <span><b>TERMS OF PAYMENT</b></span>
                                             </div>
                                         </div>
                                         <div class="row" style="text-align:center;font-size:9px;">
-                                            <div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
+                                            <div class="col-3" style="border: 1px solid black;border-top-style: hidden;">
+                                                <span t-field="o.purchase_order"/>
+                                            </div>
+                                            <div class="col-3" style="border: 1px solid black;border-top-style: hidden;">
                                                 <span t-field="o.contract_type"/>
                                             </div>
-                                            <div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
+                                            <div class="col-3" style="border: 1px solid black;border-top-style: hidden;">
                                                 <span t-field="o.payment_cond_id.name"/>
                                             </div>
-                                            <div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
+                                            <div class="col-3" style="border: 1px solid black;border-top-style: hidden;">
                                                 <span t-field="o.payment_term_id.name"/>
                                             </div>
                                         </div>
@@ -92,21 +100,21 @@
                                 </div>
                                 <div class="row ml4 mr4 mt8" style="text-align:left;font-size:9px;">
                                     <div class="col-3">
-                                        <span>PRODUCT INFORMATION:</span>
+                                        <span><b>PRODUCT INFORMATION:</b></span>
                                     </div>
                                     <div class="col-9" t-if="o.order_line">
-                                        <div class="row" style="text-align:center;font-size:9px;background-color:#777799;">
+                                        <div class="row" style="text-align:center;font-size:9px;background-color:#2F4C92;color:#FFFFFF;">
                                             <div class="col-3" style="border: 1px solid black;">
-                                                <span>PRODUCT</span>
+                                                <span><b>PRODUCT</b></span>
                                             </div>
                                             <div class="col-3" style="border: 1px solid black;">
-                                                <span>VARIETY</span>
+                                                <span><b>VARIETY</b></span>
                                             </div>
                                             <div class="col-3" style="border: 1px solid black;">
-                                                <span>TOTAL QUANTITY</span>
+                                                <span><b>TOTAL QUANTITY</b></span>
                                             </div>
                                             <div class="col-3" style="border: 1px solid black;">
-                                                <span>UNIT</span>
+                                                <span><b>UNIT</b></span>
                                             </div>
                                         </div>
                                         <div class="row" style="text-align:center;font-size:9px;">
@@ -126,8 +134,9 @@
                                     </div>
                                 </div>
                                 <table class="table table-sm o_main_table small mt8">
-                                    <thead style="background:#777799;">
-                                        <tr style="font-size:7px;border-bottom: 1pt solid black;">
+                                    <thead style="background-color:#2F4C92;color:#FFFFFF;">
+                                        <tr style="font-size:7px;border-bottom: 1pt solid black;font-weight: bold">
+                                            <th class="text-left">PURCHASE ORDER</th>
                                             <th class="text-left">PACKING</th>
                                             <th class="text-left">SIZES</th>
                                             <th class="text-left">BRAND</th>
@@ -145,6 +154,7 @@
                                     <tbody>
                                         <t t-foreach="o.order_line" t-as="line">
                                             <tr style="font-size:8px;">
+                                                <td><span t-field="line.purchase_order"/></td>
                                                 <td><span t-field="line.prod_env_type2_id.name"/></td>
                                                 <td><span t-field="line.calibre_from.qty"/>-<span t-field="line.calibre_to.qty"/></td>
                                                 <td><span t-field="line.prod_mark_id.name"/></td>
@@ -163,28 +173,28 @@
                                 </table>
                                 <div class="row ml4 mr4 mt8" style="text-align:left;font-size:9px;">
                                     <div class="col-3">
-                                        <span>DELIVERY CONDITIONS:</span>
+                                        <span><b>DELIVERY CONDITIONS:</b></span>
                                     </div>
                                     <div class="col-9" t-if="o.order_line">
-                                        <div class="row" style="text-align:center;font-size:9px;background-color:#777799;">
-                                            <div class="col-4" style="border: 1px solid black;">
+                                        <div class="row" style="text-align:center;font-size:9px;background-color:#2F4C92;color:#FFFFFF;">
+                                        <!--<div class="col-4" style="border: 1px solid black;">
                                                 <span>PORT OF ORIGIN</span>
+                                            </div>-->
+                                            <div class="col-6" style="border: 1px solid black;">
+                                                <span><b>PORT OF DESTINATION</b></span>
                                             </div>
-                                            <div class="col-4" style="border: 1px solid black;">
-                                                <span>PORT OF DESTINATION</span>
-                                            </div>
-                                            <div class="col-4" style="border: 1px solid black;">
-                                                <span>ETD</span>
+                                            <div class="col-6" style="border: 1px solid black;">
+                                                <span><b>ESTIMATED DEPARTURE DATE</b></span>
                                             </div>
                                         </div>
                                         <div class="row" style="text-align:center;font-size:9px;">
-                                            <div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
+                                            <!--<div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
                                                 <span t-field="o.VBAK_ZZID_ADUANA_SAL.name"/>
-                                            </div>
-                                            <div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
+                                            </div>-->
+                                            <div class="col-6" style="border: 1px solid black;border-top-style: hidden;">
                                                 <span t-field="o.VBAK_ZZLUG_DEST.country_id.name"/>
                                             </div>
-                                            <div class="col-4" style="border: 1px solid black;border-top-style: hidden;">
+                                            <div class="col-6" style="border: 1px solid black;border-top-style: hidden;">
                                                 <span t-field="o.etd"/>
                                             </div>
                                         </div>
@@ -192,7 +202,7 @@
                                 </div>
                                 <div class="row ml4 mr4 mt8" style="text-align:left;font-size:9px;">
                                     <div class="col-2">
-                                        <span>COMMENTS:</span>
+                                        <span><b>COMMENTS:</b></span>
                                     </div>
                                     <div class="col-10">
                                         <span t-field="o.note"/>
@@ -203,15 +213,23 @@
                         </div>
                         <div class="row mt4" style="border-style:solid; font-size:9px; border-width: 1px;">
                             <div class="col-2">
-                                <span>GENERAL TERMS AND CONDITIONS:</span>
+                                <span><b>GENERAL TERMS AND CONDITIONS:</b></span>
                             </div>
                             <div class="col-10">
                                 <span t-field="o.terms_conds_text" t-options="{&quot;widget&quot;: &quot;html&quot;}"/>
                             </div>
+                        </div>    
+                        <div class="row mt4" style="border-style:solid; font-size:9px; border-width: 1px;">
+                            <div class="col-2">
+                                <span><b>DOCUMENTARY INSTRUCTIONS:</b></span>
+                            </div>
+                            <div class="col-10">
+                                <span t-field="o.ints_docs_text" t-options="{&quot;widget&quot;: &quot;html&quot;}"/>
+                            </div>
                         </div>
                         <div class="row mt4" style="border-style:solid; font-size:9px; border-width: 1px;">
                             <div class="col-2">
-                                <span>IMPORTANT:</span>
+                                <span><b>IMPORTANT:</b></span>
                             </div>
                             <div class="col-10">
                                 <span t-field="o.important_text" t-options="{&quot;widget&quot;: &quot;html&quot;}"/>

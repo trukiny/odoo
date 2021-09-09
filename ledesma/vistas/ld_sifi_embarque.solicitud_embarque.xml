@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<t t-name="ld_sifi_embarque.solicitud_embarque">
+        <t t-call="web.html_container">
+            <t t-set="print_date" t-value="datetime.datetime.utcnow().strftime('%Y-%m-%d - %H:%M:%S')"/>
+            <t t-foreach="docs" t-as="o">
+                <t t-call="ld_sifi_embarque.internal_layout">
+                    <div class="page" style="font-family:Verdana;">
+                        <div class="row">
+                            <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;"> 
+                                <h5><b>SOLICITUD DE PERMISO DE EMBARQUE</b></h5>
+                            </div>
+                        </div>
+                        <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
+                            <div class="col-3">
+                                <span><b>DESPACHANTE:</b></span><br/>
+                                <span><b>Cliente:</b></span><br/>
+                                <span><b>País de facturación:</b></span>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.dispatcher_id.name"/><br/>
+                                <span t-field="o.partner_id.name"/><br/>
+                                <span t-field="o.VBAK_ZZID_PAIS.name"/>
+                            </div>
+                            <div class="col-3">
+                                <span><b>Núm. Instrucción: </b></span><br/>
+                                <span><b>Fecha: </b></span>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.name"/><br/>
+                                <span t-field="o.date_order"/>
+                            </div>
+                        </div>
+                        <div class="row mt8">
+                            <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
+                                <h5><b>Datos Generales de la Operación</b></h5>
+                            </div>
+                        </div>
+                        <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
+                            <div class="col-3">
+                                <span><b>Orden de Compra: </b></span><br/>
+                                <span><b>Operación: </b></span><br/>
+                                <span><b>Condición de Venta: </b></span><br/>
+                                <span><b>Transporte: </b></span><br/>
+                                <span><b>Flete/Cont. o Bodega: </b></span><br/>
+                                <span><b>Flete/Cont. o Bodega Original: </b></span><br/>
+                                <span><b>Representante: </b></span><br/>
+                                <span><b>Banco para liquidar divisas: </b></span>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.purchase_order"/><br/>
+                                <span t-field="o.VBAK_ZZREG_ADU"/><br/>
+                                <span t-field="o.payment_cond_id.name"/><br/>
+                                <span t-field="o.VBAK_FORMA_EMB.name"/><br/>
+                                <!--<span t-field="o.currency_id.name"/>-->
+                                <span>USD </span><span t-field="o.amount_price_ship"/><br/>
+                                <span t-field="o.currency_id.name"/><span> </span><span t-field="o.unified_ship_cost"/><br/>
+                                <span t-field="o.representative_id.name"/><br/>
+                                <span t-field="o.VBAK_ZZBANCO_INT.name"/>
+                            </div>
+                            <div class="col-3">
+                                <span><b>% Comisión FOB: </b></span><br/>
+                                <span><b>Fecha cierre de Venta: </b></span><br/>
+                            </div>
+                            <div class="col-3">
+                                <!--<span t-field="o.partner_id.bonus"/><br/>-->
+                                <span t-field="o.representative_id.bonus"/><br/>
+                                <span t-field="o.close_contract_date"/><br/>
+                            </div>
+                        </div>
+                        <div class="row mt8">
+                            <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
+                                <h5><b>Datos Generales del Embarque</b></h5>
+                            </div>
+                        </div>
+                        <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
+                            <div class="col-3">
+                                <span><b>Puerto de Embarque: </b></span><br/>
+                                <span><b>Puerto Destino: </b></span><br/>
+                                <span><b>Agencia Marítima: </b></span><br/>
+                                <span><b>Buque de carga: </b></span><br/>
+                                <span><b>Embarque: </b></span>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.VBAK_ZZLUGAR_EMB.name"/><br/>
+                                <span t-field="o.VBAK_ZZLUG_DEST.name"/><br/>
+                                <span t-field="o.shipping_company_id.name"/><br/>
+                                <span t-field="o.VBAK_ZZTRASP.name"/><br/>
+                                <span t-field="o.date_etd"/>
+                            </div>
+                            <div class="col-3">
+                                <span><b>Fecha Estimada: </b></span><br/>
+                                <span><b>Lugar Consolidado: </b></span><br/>
+                                <span><b>Liberacion BL: </b></span><br/>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.VBAK_ZZFEC_ETA"/><br/>
+                                <span t-field="o.VBAK_ZZLUG_CONS"/><br/>
+                            </div>
+                        </div>
+                        <div class="row mt8">
+                            <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
+                                <h5><b>Items a Embarcar</b></h5>
+                            </div>
+                        </div>
+                        <div class="row mt8" style="font-size:9px;">
+                            <div class="col-3" style="text-align:center;">
+                                <span><b>Origen:</b></span><br/>
+                            </div>
+                            <div class="col-3" style="text-align:center;">
+                                <t t-if="o.order_line">
+                                    <span t-field="o.order_line[0].prod_origin_id.name"/>
+                                </t>
+                            </div>
+                            <div class="col-3" style="text-align:center;">
+                                <span><b>Posición Arancelaria:</b></span><br/>
+                            </div>
+                            <div class="col-3" style="text-align:center;">
+                                <t t-if="o.order_line">
+                                    <span t-field="o.order_line[0].arancel_pos_id.name"/>
+                                </t>
+                            </div>
+                        </div>
+                        <table class="table table-sm o_main_table small">
+                            <thead>
+                                <tr style="font-size:9px;">
+                                    <th class="text-left">Especie</th>
+                                    <th class="text-left">Variedad</th>
+                                    <!--th class="text-left">Origen</th-->
+                                    <th class="text-left">Tipo de Envase</th>
+                                    <th class="text-left">Marca</th>
+                                    <th class="text-left">Calibres</th>
+                                    <!--<th class="text-left">Posición Arancelaria</th>-->
+                                    <th class="text-left">Peso Neto/Bruto</th>
+                                    <th class="text-left">Categoría</th>
+                                    <th class="text-left">Pallets</th>
+                                    <th class="text-left">Total Cajas</th>
+                                    <th class="text-left">Precio Incoterm</th>
+                                    <th class="text-left">Costo Flete</th>
+                                    <th class="text-left">Costo Seguro</th>
+                                    <th class="text-left">Costo Internacional</th>
+                                    <th class="text-left">Precio Fob</th>
+                                    <th class="text-left">Contramarca</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <tr style="font-size:8px;">
+                                        <td><span t-field="line.prod_type_id.name"/></td>
+                                        <td><span t-field="line.prod_variety_id.name"/></td>
+                                        <!--td><span t-field="line.prod_origin_id.name"/></td-->
+                                        <td><span t-field="line.prod_env_type2_id.name"/></td>
+                                        <td><span t-field="line.prod_mark_id.name"/></td>
+                                        <td><span t-field="line.calibre_from.qty"/>/<span t-field="line.calibre_to.qty"/></td>
+                                        <!--<td><span t-field="line.arancel_pos_id.name"/></td>-->
+                                        <td><span t-field="line.prod_env_type2_id.nett"/>/<span t-field="line.prod_env_type2_id.gross"/></td>
+                                        <td><span t-field="line.label_categ_id.name"/></td>
+                                        <td><span t-field="line.pallet_qty"/></td>
+                                        <td><span t-field="line.product_uom_qty2" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                        <td><span t-field="line.price_unit" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                        <td><span t-field="line.freight"/></td>
+                                        <td><span t-field="line.assurance_per_box"/></td>
+                                        <td><span t-field="o.expenses_destination" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                        <!--<td><span t-field="line.fob_price"/></td>-->
+                                        <td><span t-field="line.fob_unit"/></td>
+                                        <td><span t-field="line.countermark_id.name"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <t t-if="o.note">
+                            <div class="row mt8">
+                                <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
+                                    <h5><b>Observaciones</b></h5>
+                                </div>
+                            </div>
+                            <div class="row mt8" style="font-size:9px;">
+                                <div class="col-12" style="text-align:center;">
+                                    <span t-field="o.note"/>
+                                </div>
+                            </div>
+                        </t>
+                        <div class="row mt8">
+                            <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
+                                <h5><b>Totales</b></h5>
+                            </div>
+                        </div>
+                        <table class="table table-sm o_main_table small">
+                            <thead>
+                                <tr style="font-size:9px;">
+                                    <th class="text-left">Especie</th>
+                                    <th class="text-left">Variedad</th>
+                                    <th class="text-left">Tipo de Envase</th>
+                                    <th class="text-left">Marca</th>
+                                    <th class="text-left">Peso Neto</th>
+                                    <th class="text-left">Peso Bruto</th>
+                                    <th class="text-left">Total Pallets</th>
+                                    <th class="text-left">Total Cajas</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="o.order_line" t-as="line">
+                                    <tr style="font-size:8px;">
+                                        <td><span t-field="line.prod_type_id.name"/></td>
+                                        <td><span t-field="line.prod_variety_id.name"/></td>
+                                        <td><span t-field="line.prod_mark_id.name"/></td>
+                                        <td><span t-field="line.prod_env_type2_id.name"/></td>
+                                        <td><span t-field="line.prod_env_type2_id.nett" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                        <td><span t-field="line.prod_env_type2_id.gross" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                        <td><span t-field="line.pallet_qty" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                        <td><span t-field="line.product_uom_qty2" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
+                            <div class="col-3">
+                                <span><b>Cantidad de Pallets:</b></span><br/>
+                                <span><b>Cantidad de Cajas:</b></span><br/>
+                                <span><b>Peso Neto Total:</b></span><br/>
+                                <span><b>Peso Bruto Total:</b></span><br/>
+                                <span><b>Total Fob:</b></span><br/>
+                                <span><b>Total Flete:</b></span><br/>
+                                <span><b>Total Seguro:</b></span><br/>
+                                <span><b>Total Gastos:</b></span><br/>
+                                <span><b>Total Final:</b></span><br/>
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.pallets_qty"/><br/>
+                                <span t-field="o.tot_qty"/><br/>
+                                <span t-field="o.tot_nett"/><br/>
+                                <span t-field="o.tot_gross"/><br/>
+                                <span t-field="o.fob_price" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                <span t-field="o.total_freight" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                <span t-field="o.total_assurance" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                <span t-field="o.tot_expenses_destination" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                <span t-field="o.amount_total"/><br/>
+                            </div>
+                            <div class="col-3">
+                                <span><b>Comision Representante:</b></span><br/>
+                            </div>
+                            <div class="col-3">
+                                <span t-esc="(o.fob_price * (float(o.partner_id.bonus)-float(o.representative_id.bonus)) / 100)" t-options="{&quot;widget&quot;: &quot;float&quot;, &quot;precision&quot;: 2}"/>
+                            </div>
+                        </div>
+                        <div class="row mt8">
+                            <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
+                                <h5><b>Instrucciones Documentales</b></h5>
+                            </div>
+                        </div>
+                        <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
+                            <div class="col-12">
+                                <span t-field="o.doc_inst_txt" t-options="{&quot;widget&quot;: &quot;html&quot;}"/>
+                            </div>
+                        </div>
+
+                    </div> <!--page-->
+                </t>
+            </t>
+        </t>
+    </t>
+
+    
