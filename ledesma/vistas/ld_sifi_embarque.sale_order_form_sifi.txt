@@ -329,11 +329,11 @@
                             <field name="customs_ids" attrs="{'readonly':[('sap_code', '!=', False)]}">
                                 <tree>
                                     <field name="NUM_PERM" width="150px"/>
-                                    <field name="FECHA_OFI"/>
-                                    <field name="FECHA_PREC"/>
-                                    <field name="FECHA_CUMP"/>
-                                    <field name="FECHA_REI"/>
-                                    <field name="MONTO_REI"/>
+                                    <field name="FECHA_OFI" width="150px"/>
+                                    <field name="FECHA_PREC" width="150px"/>
+                                    <field name="FECHA_CUMP" width="150px"/>
+                                    <field name="FECHA_REI" width="150px"/>
+                                    <field name="MONTO_REI" width="150px"/>
                                 </tree>
                             </field>
                         </page>
