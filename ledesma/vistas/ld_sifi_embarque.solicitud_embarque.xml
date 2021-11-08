@@ -79,7 +79,7 @@
                                 <span><b>Puerto Destino: </b></span><br/>
 								<span><b>Pais Destino: </b></span><br/>
                                 <span><b>Agencia Marítima: </b></span><br/>
-                                
+
                             </div>
                             <div class="col-3">
                                 <span t-field="o.VBAK_ZZLUG_CONS"/><br/>
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
                         </t>
-                        <div class="row mt8">
+                        <!--<div class="row mt8">
                             <div class="col-12" style="background-color:#2F4C92;color:#FFFFFF;text-align:center;">
                                 <h5><b>Totales</b></h5>
                             </div>
@@ -214,7 +214,7 @@
                                     </tr>
                                 </t>
                             </tbody>
-                        </table>
+                        </table>-->
                         <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
                             <div class="col-3">
                                 <span><b>Cantidad de Pallets:</b></span><br/>
@@ -232,10 +232,10 @@
                                 <span t-field="o.tot_qty"/><br/>
                                 <span t-field="o.tot_nett"/><br/>
                                 <span t-field="o.tot_gross"/><br/>
-                                <span t-field="o.fob_price" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
-                                <span t-field="o.total_freight" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
-                                <span t-field="o.total_assurance" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
-                                <span t-field="o.tot_expenses_destination" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                <span t-field="o.fob_price" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
+                                <span t-field="o.total_freight" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
+                                <span t-field="o.total_assurance" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
+                                <span t-field="o.tot_expenses_destination" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
                                 <span t-field="o.amount_total"/><br/>
                             </div>
                             <div class="col-3">
