@@ -50,6 +50,7 @@
                                     <field name="travel_nr"/>
                                 </group>
                                 <group>
+                                    <field name="VBAK_ZZPEM_PROV"/>
                                     <field name="ld_state_id"/>
                                     <field name="VBAK_ZZLUGAR_EMB"/>
                                     <field name="ld_embark_date"/>
@@ -181,7 +182,6 @@
                                 </group>-->
                                 <group>
                                     <field name="VBAK_ZZID_PAIS" invisible="1"/>
-                                    <field name="VBAK_ZZPEM_PROV"/>
                                     <field name="vs"/>
                                     <field name="LIKP_XABLN"/>
                                     <field name="LIKP_BOLNR"/>
