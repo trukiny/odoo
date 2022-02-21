@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <form>
-                 <header>
+                <header>
+                    <button name="get_customs" type="object" string="Datos Aduana" class="oe_highlight"/>
                     <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
                 </header>
                 <sheet>
@@ -13,29 +14,29 @@
                         <group>
                             <field name="LIKP_XBLNR"/>
                             <field name="create_date" attrs="{'readonly': True}"/>
+                            <field name="year_only"/>
                             <field name="partner_id"/>
                             <field name="ld_prod_type_id"/>
                             <field name="ld_prod_var_com_id"/>
                             <field name="ld_state_id"/>
-                            <field name="VBAK_ZZLUG_CONS"/>
-                            <field name="VBAK_ZZLUG_EMB"/>
-                            <field name="VBAK_ZZLUG_DEST"/>
-                            <field name="VBAK_ZZID_PAIS"/>
-                            <field name="VBAK_ZZID_ADUANA_INT"/>
-                            <field name="VBAK_ZZID_ADUANA_SAL"/>
-                            <field name="payment_cond_id"/>
-                            <field name="travel_nr"/>
-                            <field name="instruction_id"/>
-                            <field name="sap_code"/>
+                            <field name="VBAK_ZZLUG_CONS" invisible="1"/>
+                            <field name="VBAK_ZZLUG_EMB" invisible="1"/>
+                            <field name="VBAK_ZZLUG_DEST" invisible="1"/>
+                            <field name="VBAK_ZZID_PAIS" invisible="1"/>
+                            <field name="VBAK_ZZID_ADUANA_INT" invisible="1"/>
+                            <field name="VBAK_ZZID_ADUANA_SAL" invisible="1"/>
+                            <field name="payment_cond_id" invisible="1"/>
+                            <field name="instruction_id" invisible="1"/>
+                            <field name="sap_code" invisible="1"/>
                         </group>
                         <group>
                             <field name="LIKP_WADAT_IST"/>
-                            <field name="LIKP_XBLNR_2"/>
-                            <field name="LIKP_VBELN_2"/>
+                            <field name="LIKP_VBELN_2" invisible="1"/>
+                            <field name="LIKP_XBLNR_2" invisible="1"/>
                             <!--<field name="VBAK_ZZATA"/>-->
-                            <field name="booking"/>
-                            <field name="shipping_company_id"/>
-                            <field name="consolidation_date"/>
+                            <field name="booking" invisible="1"/>
+                            <field name="shipping_company_id" invisible="1"/>
+                            <field name="consolidation_date" invisible="1"/>
                             <!--<field name="RETURN"/>
                             <field name="DELIVERY"/>
                             <field name="LIKP_LFART"/>
@@ -43,12 +44,15 @@
                             <field name="LIKP_VSBED"/>
                             <field name="LIKP_VSTEL"/>
                             <field name="LIKP_VKORG"/>-->
-                            <field name="VBAK_ZZTRASP"/>
+                            <field name="VBAK_ZZTRASP" invisible="1"/>
+                            <field name="travel_nr" invisible="1"/>
                             <field name="LIKP_TRATY"/>
                             <field name="container"/>
                             <field name="LIKP_BTGEW"/>
                             <field name="LIKP_NTGEW"/>
-                            <field name="VBAK_ZZPEM_PROV"/>
+                            <field name="VBAK_ZZPEM_PROV" invisible="1"/>
+                            <field name="total_pallets"/>
+                            <field name="total_boxes"/>
                         </group>
                     </group>
                     <notebook>
@@ -59,7 +63,7 @@
                                     <field name="LIPS_LFIMG"/>
                                     <field name="LIPS_VRKME"/>
                                     <field name="LIPS_WERKS"/>
-                                    <field name="LIPS_VGBEL"/>
+                                    <field name="LIPS_VGBEL" invisible="1"/>
                                     <field name="VBKD_BSTKD"/>
                                     <button name="open_lots" string="Open Pallets" icon="fa-folder-open" type="object"/>
                                 </tree>
@@ -74,29 +78,33 @@
                                 </group>
                             </group>
                         </page>
-                        <page name="two" string="Page 2">
+                        <!--page name="two" string="Page 2">
                             <group>
                                 <group>
-                                    <field name="vs"/>
-                                    <field name="LIKP_XABLN"/>
-                                    <field name="LIKP_BOLNR"/>
-                                    <field name="thermograph"/>
+                                    <field name="vs" invisible="1"/>
+                                    <field name="LIKP_XABLN" invisible="1"/>
+                                    <field name="LIKP_BOLNR" invisible="1"/>
+                                    <field name="thermograph" invisible="1"/>
                                 </group>
                                 <group>
-                                    <field name="number_termograph"/>
-                                    <field name="pallet_termograph"/>
-                                    <field name="seal_detail"/>
+                                    <field name="number_termograph" invisible="1"/>
+                                    <field name="pallet_termograph" invisible="1"/>
+                                    <field name="seal_detail" invisible="1"/>
                                 </group>
                             </group>
-                        </page>
-                        <page name="three" string="Page 3">
+                        </page-->
+                        <!--<page name="three" string="Page 3">
                             <group>
                                 <group>
                                     <field name="date_etd"/>
-                                    <field name="etd_week"/>
+                                    <field name="etd_week_ro"/>
+                                    <field name="etd_week" invisible="1"/>
                                     <field name="VBAK_ZZFEC_ETA"/>
                                     <field name="real_eta"/>
-                                    <field name="eta_week"/>
+                                    <field name="eta_week_ro"/>
+                                    <field name="eta_week" invisible="1"/>
+                                    <field name="arrived_date"/>
+                                    <field name="arrived_week"/>
                                 </group>
                                 <group>
                                     <field name="delay_days"/>
@@ -105,7 +113,7 @@
                                     <field name="terminal_invoice"/>
                                 </group>
                             </group>
-                        </page>
+                        </page>-->
                         <page name="four" string="Page 4">
                             <group>
                                 <group>
@@ -140,15 +148,7 @@
                                     <field name="LIKP_VSBED"/>
                                     <field name="LIKP_VSTEL"/>
                                     <field name="LIKP_VKORG"/>
-                                </group>
-                            </group>
-                        </page>
-                        <page name="tracking" string="Tracking">
-                            <group>
-                                <group>
-                                    <field name="request_id"/>
-                                    <field name="response"/>
-                                    <field name="last_update"/>
+                                    <field name="company_id"/>
                                 </group>
                             </group>
                         </page>
