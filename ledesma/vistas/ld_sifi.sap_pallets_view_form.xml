@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="location_sel"/>
+                            <field name="product_id"/>
+                            <field name="ld_prod_type_id"/>
+                            <field name="ld_prod_var_field_id"/>
+                            <field name="ld_prod_var_com_id"/>
+                            <field name="ld_prod_mark_id"/>
+                            <field name="ld_prod_env_type2_id"/>
+                        </group>
+                        <group>
+                            <field name="ld_crate_date"/>
+                            <field name="ld_update_date"/>
+                            <field name="ld_countermark_id"/>
+                            <field name="ld_countermark_pos_id"/>
+                            <field name="ld_calibre_ue"/>
+                            <field name="ld_calibre_qty"/>
+                            <field name="ld_calibre_from"/>
+                            <field name="ld_calibre_to"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="one" string="Page 1_1">
+                            <group>
+                                <group>
+                                    <!--<field name="name"/>-->
+                                    <field name="company_id"/>
+                                    <field name="ld_senasa_pallet"/>
+                                    <field name="ld_center_loc_id"/>
+                                    <field name="ld_warehouse_id"/>
+                                    <field name="ld_partner_id"/>
+                                    <field name="ld_state_id"/>
+                                    <field name="VBAK_ZZLUGAR_EMB"/>
+                                    <field name="ld_embark_date"/>
+                                </group>
+                                <group>
+                                    <field name="ld_VBAK_FORMA_EMB"/>
+                                    <field name="VEKP_EXIDV2"/>
+                                    <field name="ld_VBAK_ZZTRASP"/>
+                                    <field name="ld_VBAK_ZZLUG_DEST"/>
+                                    <field name="VBAK_ZZID_PAIS"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="two" string="Page 2_1">
+                            <group>
+                                <group>
+                                    <field name="blanket_order_id"/>
+                                    <field name="ld_embark_nr"/>
+                                    <field name="LIPS_VBGEL"/>
+                                    <field name="ld_packing_id"/>
+                                    <field name="LIKP_XBLNR"/>
+                                </group>
+                                <group>
+                                    <field name="year_only"/>
+                                    <field name="sap_comex_id"/>
+                                    <field name="ld_pickup_id"/>
+                                    <field name="VBAK_VBELN"/>
+                                    <field name="LIKT_WADAT_IST"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="three" string="Page 3_1">
+                            <group>
+                                <group>
+                                    <field name="ld_class"/>
+                                    <field name="ld_class_categ"/>
+                                    <field name="ld_farm"/>
+                                    <field name="ld_market"/>
+                                    <field name="ld_bank_account"/>
+                                    <field name="ld_gln"/>
+                                    <field name="ld_packer"/>
+                                    <field name="ld_box_type"/>
+                                    <field name="ld_label_categ"/>
+                                </group>
+                                <group>
+                                    <field name="ld_real_categ"/>
+                                    <!--<field name="ld_senasa_nr"/>-->
+                                    <field name="ld_sub_gln"/>
+                                    <field name="ld_renspa"/>
+                                    <field name="ld_fitosan_nr"/>
+                                    <field name="SELLO_CLAVE"/>
+                                    <field name="ld_ean"/>
+                                    <field name="ld_plu"/>
+                                    <field name="ld_special"/>
+                                    <field name="ld_productor"/>
+                                    <field name="ld_proc_order"/>
+                                    <field name="LIKT_XABLN"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="four" string="Page 4_1">
+                            <group>
+                                <group>
+                                    <field name="ld_lot_orig_center1"/>
+                                    <field name="ld_lot_nr_harvest1"/>
+                                    <field name="ld_prod_unit1"/>
+                                    <field name="ld_up_boxes1"/>
+                                    <field name="ld_up_certif1"/>
+                                </group>
+                                <group>
+                                    <field name="ld_lot_orig_center2"/>
+                                    <field name="ld_lot_nr_harvest2"/>
+                                    <field name="ld_prod_unit2"/>
+                                    <field name="ld_up_boxes2"/>
+                                    <field name="ld_up_certif2"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="ld_lot_orig_center3"/>
+                                    <field name="ld_lot_nr_harvest3"/>
+                                    <field name="ld_prod_unit3"/>
+                                    <field name="ld_up_boxes3"/>
+                                    <field name="ld_up_certif3"/>
+                                </group>
+                                <group>
+                                    <field name="ld_lot_orig_center4"/>
+                                    <field name="ld_lot_nr_harvest4"/>
+                                    <field name="ld_prod_unit4"/>
+                                    <field name="ld_up_boxes4"/>
+                                    <field name="ld_up_certif4"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="ld_lot_orig_center5"/>
+                                    <field name="ld_lot_nr_harvest5"/>
+                                    <field name="ld_prod_unit5"/>
+                                    <field name="ld_up_boxes5"/>
+                                    <field name="ld_up_certif5"/>
+                                </group>
+                                <group>
+                                    <field name="ld_lot_orig_center6"/>
+                                    <field name="ld_lot_nr_harvest6"/>
+                                    <field name="ld_prod_unit6"/>
+                                    <field name="ld_up_boxes6"/>
+                                    <field name="ld_up_certif6"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="five" string="Page 5_1">
+                            <group>
+                                <group>
+                                    <field name="local_del_date"/>
+                                    <field name="recep_date"/>
+                                    <field name="expo_del_date"/>
+                                    <field name="eta_date"/>
+                                    <field name="arrived_date"/>
+                                    <field name="create_date" invisible="1"/>
+                                </group>
+                                <group>
+                                    <field name="date_dif1"/>
+                                    <field name="date_dif2"/>
+                                    <field name="date_dif3"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="six" string="Page 6_1">
+                            <group>
+                                <group>
+                                    <field name="VBAK_ZZLUG_CONS"/>
+                                    <field name="VBAK_ZZID_PAIS"/>
+                                    <field name="VBAK_ZZID_ADUANA_INT"/>
+                                    <field name="VBAK_ZZID_ADUANA_SAL"/>
+                                    <field name="payment_cond_id"/>
+                                    <field name="booking"/>
+                                    <field name="shipping_company_id"/>
+                                    <field name="consolidation_date"/>
+                                </group>
+                                <group>
+                                    <field name="travel_nr"/>
+                                    <field name="VBAK_ZZPEM_PROV"/>
+                                    <field name="vs"/>
+                                    <field name="LIKP_XABLN"/>
+                                    <field name="LIKP_BOLNR"/>
+                                    <field name="thermograph"/>
+                                    <field name="number_termograph"/>
+                                    <field name="pallet_termograph"/>
+                                    <field name="seal_detail"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="obs" string="Observaciones">
+                            <group>
+                                <field name="obs"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        
