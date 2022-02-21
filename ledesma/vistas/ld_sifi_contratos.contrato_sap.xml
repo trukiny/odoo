@@ -93,7 +93,7 @@
                                                 <span t-field="o.payment_cond_id.name"/>
                                             </div>
                                             <div class="col-3" style="border: 1px solid black;border-top-style: hidden;">
-                                                <span t-field="o.payment_term_id.name"/>
+                                                <span t-field="o.ld_payment_term_id"/>
                                             </div>
                                         </div>
                                     </div>
@@ -157,7 +157,7 @@
                                                 <td><span t-field="line.purchase_order"/></td>
                                                 <td><span t-field="line.prod_env_type2_id.name"/></td>
                                                 <td><span t-field="line.calibre_from.qty"/>-<span t-field="line.calibre_to.qty"/></td>
-                                                <td><span t-field="line.prod_mark_id.name"/></td>
+                                                <td><span t-field="line.prod_mark_id2.name"/></td>
                                                 <td><span t-field="line.label_categ_id.name"/></td>
                                                 <td><span t-field="line.quality"/></td>
                                                 <td><span t-field="line.quality_perc"/></td>

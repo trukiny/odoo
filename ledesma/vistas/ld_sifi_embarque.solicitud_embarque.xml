@@ -44,7 +44,7 @@
                                 <span><b>Flete/Cont. o Bodega: </b></span><br/>
                                 <span><b>Flete/Cont. o Bodega Original: </b></span><br/>
                                 <span><b>Representante: </b></span><br/>
-                                <span><b>Banco para liquidar divisas: </b></span>
+								<span><b>% Comisión FOB: </b></span><br/>
                             </div>
                             <div class="col-3">
                                 <span t-field="o.purchase_order"/><br/>
@@ -55,15 +55,15 @@
                                 <span>USD </span><span t-field="o.amount_price_ship"/><br/>
                                 <span t-field="o.currency_id.name"/><span> </span><span t-field="o.unified_ship_cost"/><br/>
                                 <span t-field="o.representative_id.name"/><br/>
-                                <span t-field="o.VBAK_ZZBANCO_INT.name"/>
+                                <span t-field="o.representative_id.bonus"/><br/>
                             </div>
                             <div class="col-3">
-                                <span><b>% Comisión FOB: </b></span><br/>
+                                <span><b>Banco para liquidar divisas: </b></span>
                                 <span><b>Fecha cierre de Venta: </b></span><br/>
                             </div>
                             <div class="col-3">
                                 <!--<span t-field="o.partner_id.bonus"/><br/>-->
-                                <span t-field="o.representative_id.bonus"/><br/>
+                                <span t-field="o.VBAK_ZZBANCO_INT.name"/>
                                 <span t-field="o.close_contract_date"/><br/>
                             </div>
                         </div>
@@ -74,27 +74,30 @@
                         </div>
                         <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
                             <div class="col-3">
-                                <span><b>Puerto de Embarque: </b></span><br/>
-                                <span><b>Puerto Destino: </b></span><br/>
-                                <span><b>Agencia Marítima: </b></span><br/>
-                                <span><b>Buque de carga: </b></span><br/>
-                                <span><b>Embarque: </b></span>
-                            </div>
-                            <div class="col-3">
-                                <span t-field="o.VBAK_ZZLUGAR_EMB.name"/><br/>
-                                <span t-field="o.VBAK_ZZLUG_DEST.name"/><br/>
-                                <span t-field="o.shipping_company_id.name"/><br/>
-                                <span t-field="o.VBAK_ZZTRASP.name"/><br/>
-                                <span t-field="o.date_etd"/>
-                            </div>
-                            <div class="col-3">
-                                <span><b>Fecha Estimada: </b></span><br/>
                                 <span><b>Lugar Consolidado: </b></span><br/>
+								<span><b>Puerto de Embarque: </b></span><br/>
+                                <span><b>Puerto Destino: </b></span><br/>
+								<span><b>Pais Destino: </b></span><br/>
+                                <span><b>Agencia Marítima: </b></span><br/>
+
+                            </div>
+                            <div class="col-3">
+                                <span t-field="o.VBAK_ZZLUG_CONS"/><br/>
+								<span t-field="o.VBAK_ZZLUGAR_EMB.name"/><br/>
+                                <span t-field="o.VBAK_ZZLUG_DEST.name"/><br/>
+								<span t-field="o.VBAK_ZZID_PAIS.name"/><br/>
+                                <span t-field="o.shipping_company_id.name"/><br/>
+                            </div>
+                            <div class="col-3">
+                                <span><b>Buque de carga: </b></span><br/>
+                                <span><b>ETD: </b></span><br/>
+								<span><b>ETA: </b></span><br/>
                                 <span><b>Liberacion BL: </b></span><br/>
                             </div>
                             <div class="col-3">
+								<span t-field="o.VBAK_ZZTRASP.name"/><br/>
+                                <span t-field="o.date_etd"/><br/>
                                 <span t-field="o.VBAK_ZZFEC_ETA"/><br/>
-                                <span t-field="o.VBAK_ZZLUG_CONS"/><br/>
                             </div>
                         </div>
                         <div class="row mt8">
@@ -184,7 +187,7 @@
                                 <h5><b>Totales</b></h5>
                             </div>
                         </div>
-                        <table class="table table-sm o_main_table small">
+                        <!--<table class="table table-sm o_main_table small">
                             <thead>
                                 <tr style="font-size:9px;">
                                     <th class="text-left">Especie</th>
@@ -211,7 +214,7 @@
                                     </tr>
                                 </t>
                             </tbody>
-                        </table>
+                        </table>-->
                         <div class="row mt8" style="border-style:solid; font-size:11px; border-width: 1px;">
                             <div class="col-3">
                                 <span><b>Cantidad de Pallets:</b></span><br/>
@@ -229,10 +232,10 @@
                                 <span t-field="o.tot_qty"/><br/>
                                 <span t-field="o.tot_nett"/><br/>
                                 <span t-field="o.tot_gross"/><br/>
-                                <span t-field="o.fob_price" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
-                                <span t-field="o.total_freight" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
-                                <span t-field="o.total_assurance" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
-                                <span t-field="o.tot_expenses_destination" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/><br/>
+                                <span t-field="o.fob_price" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
+                                <span t-field="o.total_freight" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
+                                <span t-field="o.total_assurance" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
+                                <span t-field="o.tot_expenses_destination" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/><br/>
                                 <span t-field="o.amount_total"/><br/>
                             </div>
                             <div class="col-3">

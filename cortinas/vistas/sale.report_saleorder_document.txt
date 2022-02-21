@@ -17,43 +17,59 @@
                 </t>
             </t>
         </t>
+        <t t-if="doc_model in ['sale.order']"> 
+           <h2 class="mt16">
+              <t t-if="not (env.context.get('proforma', False) or is_pro_forma)">
+                  <span t-if="doc.state not in ['draft','sent']">Pedido # </span>
+                  <span t-if="doc.state in ['draft','sent']">Presupuesto # </span>
+              </t>
+              <t t-if="env.context.get('proforma', False) or is_pro_forma">
+                  <span>Pro-Forma Invoice # </span>
+          </t>
+              <span t-field="doc.name"/>
+          </h2>
+        </t>        
+        <!--<xpath expr="//div[@class='header']" position="replace">-->
         <div class="page">
             <div class="oe_structure"/>
-            <div class="row" id="informations">
+            <t t-if="doc_model in ['sale.order']">
+              <div class="row mt16 mb32" id="informations">
                 <div t-if="doc.client_order_ref" class="col-auto mw-100 mb-2">
-                    <strong>Su Referencia:</strong>
+                    <strong>Your Reference:</strong>
                     <p class="m-0" t-field="doc.client_order_ref"/>
                 </div>
-                <!--
                 <div t-if="doc.date_order and doc.state not in ['draft','sent']" class="col-auto mw-100 mb-2">
                     <strong>Order Date:</strong>
                     <p class="m-0" t-field="doc.date_order"/>
                 </div>
-                -->
-                <div t-if="doc.date_order and doc.state in ['','']" class="col-auto mw-100 mb-2">
-                    <strong>Fecha Presupuesto:</strong>
+                <div t-if="doc.date_order and doc.state in ['draft','sent']" class="col-auto mw-100 mb-2">
+                    <strong>Quotation Date:</strong>
                     <p class="m-0" t-field="doc.date_order" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
                 </div>
-                <div t-if="doc.validity_date and doc.state in ['', '']" class="col-auto mw-100 mb-2" name="expiration_date">
-                    <strong>Vencimiento:</strong>
+                <div t-if="doc.validity_date and doc.state in ['draft', 'sent']" class="col-auto mw-100 mb-2" name="expiration_date">
+                    <strong>Expiration:</strong>
                     <p class="m-0" t-field="doc.validity_date"/>
                 </div>
-                <!--
                 <div t-if="doc.user_id.name" class="col-auto mw-100 mb-2">
                     <strong>Salesperson:</strong>
                     <p class="m-0" t-field="doc.user_id"/>
                 </div>
-                -->
-            </div>
+            </div>     
+            </t>
             <!-- Is there a discount on at least one line? -->
             <t t-set="display_discount" t-value="any([l.discount for l in doc.order_line])"/>
 
             <table class="table table-sm o_main_table">
                 <thead>
                     <tr>
-                        <th name="th_description" class="text-left">Descripcion</th>
+                        <th name="th_description" class="text-center">Descripcion</th>
+                        <th name="th_ambient" class="text-left">Ambiente</th>
+                        <th name="th_alto" class="text-left">Alto</th>
+                        <th name="th_ancho" class="text-left">Ancho</th>
+                        <th name="th_largo" class="text-center">Largo Cadena</th>
+                        <th name="th_paneles" class="text-left">Paneles</th>
                         <th name="th_quantity" class="text-right">Cantidad</th>
-                        <th name="th_priceunit" class="text-right">Precio unitario</th>
+                        <th name="th_priceunit" class="text-center">Precio unitario</th>
                         <th name="th_discount" t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
                             <span>Desc.%</span>
                         </th>
@@ -72,24 +88,42 @@
 
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_excluded"/>
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
-                        <t t-set="precio_impuesto" t-value="((line.price_tax/line.price_subtotal)*line.price_unit)+line.price_unit"/>
-
+                        <t t-if="line.price_unit == 0">
+                          <t t-set="precio_impuesto" t-value="line.price_unit"/>
+                        </t>
+                        <t t-if="line.price_unit != 0">
+                          <t t-set="precio_impuesto" t-value="((line.price_tax/line.price_subtotal)*line.price_unit)+line.price_unit"/>
+                        </t>
                         <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
                             <t t-if="not line.display_type">
                                 <td name="td_name"><span t-field="line.name"/></td>
-                                <td name="td_quantity" class="text-right">
+                                <td name="td_ambient"><span t-field="line.ambient"/></td>
+                                <td name="td_alto" class="text-center">
+                                    <span t-esc="line.height" t-options="{'widget': 'float', 'precision': 0}"/>
+                                </td>
+                                <td name="td_ancho" class="text-center">
+                                    <span t-esc="line.width" t-options="{'widget': 'float', 'precision': 0}"/>
+                                </td>
+                                <td name="td_largo" class="text-center">
+                                    <span t-esc="line.length" t-options="{'widget': 'float', 'precision': 0}"/>
+                                </td>
+                                <td name="td_paneles" class="text-center">
+                                    <span t-esc="line.panels"/>
+                                </td>
+                                <td name="td_quantity" class="text-center">
                                     <span t-field="line.product_uom_qty"/>
-                                    <span t-field="line.product_uom" groups="uom.group_uom"/>
+                                    <!--span t-field="line.product_uom" groups="uom.group_uom"/-->
                                 </td>
                                 <!--
                                 <td name="td_priceunit" class="text-right">
                                     <span t-field="line.price_unit"/>
                                 </td>
                                 -->
-                                <td name="td_priceunit" class="text-right">
-                                    <span t-esc="round(precio_impuesto,2)"/>
+                                
+                                <td name="td_priceunit" class="text-center">
+                                    <span t-esc="round(precio_impuesto,2)" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: doc.pricelist_id.currency_id}"/>
                                 </td>
-                                <td t-if="display_discount" class="text-right" groups="product.group_discount_per_so_line">
+                                <td t-if="display_discount" class="text-center" groups="product.group_discount_per_so_line">
                                     <span t-field="line.discount"/>
                                 </td>
                                <!--
@@ -160,7 +194,7 @@
                     <p t-field="doc.signed_by"/>
                 </div>
             </div>
-            <!--<div>
+            <div>
             <table class="table table-sm o_main_table mt32">
             <thead>
                     <tr>
@@ -181,7 +215,7 @@
                     </tr>
                 </thead>
                 </table>
-            </div>-->
+            </div>
             <div class="oe_structure mt32"/>
 
             <p t-field="doc.note"/>
