@@ -177,12 +177,10 @@
                         </page>
                         <page name="six" string="Page 6_1">
                             <group>
+                                <!--<group>
+                                </group>-->
                                 <group>
-                                    
                                     <field name="VBAK_ZZID_PAIS"/>
-                                </group>
-                                <group>
-                                    
                                     <field name="VBAK_ZZPEM_PROV"/>
                                     <field name="vs"/>
                                     <field name="LIKP_XABLN"/>
