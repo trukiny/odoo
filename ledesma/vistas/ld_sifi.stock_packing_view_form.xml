@@ -1,22 +1,26 @@
 <?xml version="1.0"?>
 <form>
- <header>
-                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
-                </header>
-                <sheet>
+                    <header>
+                        <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
                     <div class="oe_title">
                         <h1>
                             <field name="name" readonly="1"/>
                         </h1>
-                    </div>
+                    </div>    
                     <group>
                         <group>
                             <field name="instruction_id"/>
+                            <field name="year_only"/>
+                            <field name="company_id"/>
                             <field name="LIKP_XBLNR"/>
+                            <field name="booking"/>
                             <field name="create_date" attrs="{'readonly': True}"/>
                             <field name="partner_id"/>
                             <field name="ld_prod_type_id"/>
                             <field name="ld_prod_var_com_id"/>
+                            <field name="ld_state_id"/>
                             <field name="LIKP_TRATY"/>
                             <field name="shipping_company_id"/>
                             <field name="VBAK_ZZTRASP"/>
@@ -25,22 +29,26 @@
                             <field name="VBAK_ZZID_PAIS"/>
                         </group>
                         <group>
+                            <field name="date_etd"/>
+                            <field name="etd_week_ro"/>
+                            <field name="VBAK_ZZFEC_ETA"/>
+                            <field name="real_eta"/>
+                            <field name="eta_week_ro"/>
+                            <field name="arrived_date"/>
+                            <field name="arrived_week"/>
+                            <field name="delay_days"/>
+                            <field name="tt"/>
+                            <field name="quality_arrived"/>
+                            <field name="terminal_invoice"/>
                             <field name="LIKP_WADAT_IST"/>
-                            <field name="RETURN"/>
-                            <field name="DELIVERY"/>
-                            <field name="LIKP_LFART"/>
-                            <field name="LIKP_UPDKZ"/>
-                            <field name="LIKP_VSBED"/>
-                            <field name="LIKP_VSTEL"/>
-                            <field name="LIKP_VKORG"/>
                             <field name="LIKP_BTGEW"/>
                             <field name="LIKP_NTGEW"/>
-                            <field name="LIKP_XABLN"/>
-                            <field name="LIKP_BOLNR"/>
+                            <!--field name="LIKP_XABLN"/>
+                            <field name="LIKP_BOLNR"/-->
                         </group>
                     </group>
                     <notebook>
-                        <page name="one" string="Page 1">
+                        <page name="one" string="Page 1_2">
                             <field name="material_ids" attrs="{'readonly': [('state', 'in', ('emabrk','travel','arrive','deliver'))]}">
                                 <tree editable="botton">
                                     <field name="LIPS_MATNR"/>
@@ -49,6 +57,8 @@
                                     <field name="LIPS_WERKS"/>
                                     <field name="LIPS_VGBEL"/>
                                     <field name="VBKD_BSTKD"/>
+                                    <field name="blanket_order_id"/>
+                                    <field name="followup_nr"/>
                                     <button name="open_lots" string="Open pallets" icon="fa-folder-open" type="object"/>
                                 </tree>
                             </field>
@@ -59,6 +69,32 @@
                                     <field name="pallets_qty"/>
                                     <field name="boxes_qty"/>
                                     <field name="containerss_qty"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page name="two" string="Page 1_3">
+                            <group>
+                              <!--<group>
+                                  <field name="etd_week" invisible="1"/>
+                                  <field name="eta_week" invisible="1"/>
+                              </group>-->
+                              <group>
+                                  <field name="RETURN"/>
+                                  <field name="DELIVERY"/>
+                                  <field name="LIKP_LFART"/>
+                                  <field name="LIKP_UPDKZ"/>
+                                  <field name="LIKP_VSBED"/>
+                                  <field name="LIKP_VSTEL"/>
+                                  <field name="LIKP_VKORG"/>
+                              </group>
+                            </group>
+                        </page>
+                        <page name="tracking" string="Tracking">
+                            <group>
+                                <group>
+                                    <field name="request_id2"/>
+                                    <field name="response"/>
+                                    <field name="last_update"/>
                                 </group>
                             </group>
                         </page>
