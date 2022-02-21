@@ -180,7 +180,7 @@
                                 <!--<group>
                                 </group>-->
                                 <group>
-                                    <field name="VBAK_ZZID_PAIS"/>
+                                    <field name="VBAK_ZZID_PAIS" invisible="1"/>
                                     <field name="VBAK_ZZPEM_PROV"/>
                                     <field name="vs"/>
                                     <field name="LIKP_XABLN"/>
