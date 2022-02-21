@@ -21,13 +21,17 @@
                         </group>
                         <group>
                             <field name="ld_crate_date"/>
-                            <field name="ld_update_date"/>
+                            <field name="ld_update_date" invisible="1"/>
                             <field name="ld_countermark_id"/>
-                            <field name="ld_countermark_pos_id"/>
+                            <field name="ld_countermark_pos_id" invisible="1"/>
                             <field name="ld_calibre_ue"/>
                             <field name="ld_calibre_qty"/>
-                            <field name="ld_calibre_from"/>
-                            <field name="ld_calibre_to"/>
+                            <field name="ld_calibre_from" invisible="1"/>
+                            <field name="ld_calibre_to" invisible="1"/>
+                            <field name="company_id"/>
+                            <field name="ld_center_loc_id"/>
+                            <field name="ld_warehouse_id"/>
+                            <field name="ld_senasa_pallet"/>
                         </group>
                     </group>
                     <notebook>
@@ -35,16 +39,20 @@
                             <group>
                                 <group>
                                     <!--<field name="name"/>-->
-                                    <field name="company_id"/>
-                                    <field name="ld_senasa_pallet"/>
-                                    <field name="ld_center_loc_id"/>
-                                    <field name="ld_warehouse_id"/>
                                     <field name="ld_partner_id"/>
+                                    <field name="VBAK_ZZLUG_CONS"/>
+                                    <field name="VBAK_ZZID_ADUANA_INT"/>
+                                    <field name="VBAK_ZZID_ADUANA_SAL"/>
+                                    <field name="payment_cond_id"/>
+                                    <field name="booking"/>
+                                    <field name="shipping_company_id"/>
+                                    <field name="consolidation_date"/>
+                                    <field name="travel_nr"/>
+                                </group>
+                                <group>
                                     <field name="ld_state_id"/>
                                     <field name="VBAK_ZZLUGAR_EMB"/>
                                     <field name="ld_embark_date"/>
-                                </group>
-                                <group>
                                     <field name="ld_VBAK_FORMA_EMB"/>
                                     <field name="VEKP_EXIDV2"/>
                                     <field name="ld_VBAK_ZZTRASP"/>
@@ -170,17 +178,11 @@
                         <page name="six" string="Page 6_1">
                             <group>
                                 <group>
-                                    <field name="VBAK_ZZLUG_CONS"/>
+                                    
                                     <field name="VBAK_ZZID_PAIS"/>
-                                    <field name="VBAK_ZZID_ADUANA_INT"/>
-                                    <field name="VBAK_ZZID_ADUANA_SAL"/>
-                                    <field name="payment_cond_id"/>
-                                    <field name="booking"/>
-                                    <field name="shipping_company_id"/>
-                                    <field name="consolidation_date"/>
                                 </group>
                                 <group>
-                                    <field name="travel_nr"/>
+                                    
                                     <field name="VBAK_ZZPEM_PROV"/>
                                     <field name="vs"/>
                                     <field name="LIKP_XABLN"/>
